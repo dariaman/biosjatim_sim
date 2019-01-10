@@ -1,0 +1,18 @@
+SELECT
+fu_ajk_peserta.cabang,
+Count(fu_ajk_peserta.id) AS peserta,
+Sum(fu_ajk_peserta.kredit_jumlah) AS jumlah,
+fu_ajk_polis.nmproduk
+FROM
+fu_ajk_polis
+INNER JOIN fu_ajk_peserta ON fu_ajk_peserta.id_polis = fu_ajk_polis.id
+LEFT JOIN fu_ajk_spak ON fu_ajk_spak.spak = fu_ajk_peserta.spaj
+WHERE
+fu_ajk_polis.grupproduk = "BUKOPIN" AND
+fu_ajk_peserta.kredit_tgl BETWEEN "2015-11-01" AND "2015-11-30" AND
+fu_ajk_peserta.del IS NULL AND
+fu_ajk_peserta.id_dn IS NOT NULL 
+GROUP BY
+fu_ajk_polis.id,
+fu_ajk_peserta.cabang,
+fu_ajk_polis.nmproduk
