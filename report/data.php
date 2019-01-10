@@ -183,7 +183,7 @@ _head($user, $namauser, $photo, $logo);
 						AND ajkpeserta.asuransi like '".$idins."'
 						".$cabangverifikasi."
 						AND ajkpeserta.tglakad BETWEEN '".$startdate."' AND '".$enddate."'";
-						
+
                     $_SESSION['querylprmember'] = AES::encrypt128CBC($query, ENCRYPTION_KEY);
                     $qlpeserta = mysql_query($query); ?>
 
@@ -865,21 +865,21 @@ _head($user, $namauser, $photo, $logo);
 	                    $premi = $rtmp['premi'];
 
 	                    echo '<tr class="odd gradeX">
-											      <td>'.$li_row.'</td>
-														<td>'.$idpeserta.'</td>
-														<td>'.$nmcab.'</td>
-														<td>'.$namapeserta.'</td>
-														<td class="text-center">'.$Pekerjaan.'</td>
-														<td class="text-center">'.$tgllahir.'</td>
-														<td class="text-center">'.$usia.'</td>
-														<td class="text-center">'.$produk.'</td>														
-														<td class="text-right">'.duit($plafond).'</td>
-														<td class="text-center">'.$tenor.'</td>
-														<td class="text-center">'.$tglakad.'</td>
-														<td class="text-right">'.$tglakhir.'</td>
-														<td class="text-right">'.duit($premi).'</td>
-														<td class="text-center">'.$tipe_pinjaman.'</td>
-											   	</tr>';
+						      <td>'.$li_row.'</td>
+									<td>'.$idpeserta.'</td>
+									<td>'.$nmcab.'</td>
+									<td>'.$namapeserta.'</td>
+									<td class="text-center">'.$Pekerjaan.'</td>
+									<td class="text-center">'.$tgllahir.'</td>
+									<td class="text-center">'.$usia.'</td>
+									<td class="text-center">'.$produk.'</td>														
+									<td class="text-right">'.duit($plafond).'</td>
+									<td class="text-center">'.$tenor.'</td>
+									<td class="text-center">'.$tglakad.'</td>
+									<td class="text-right">'.$tglakhir.'</td>
+									<td class="text-right">'.duit($premi).'</td>
+									<td class="text-center">'.$tipe_pinjaman.'</td>
+						   	</tr>';
                       $li_row++;
                   } 
                 ?>

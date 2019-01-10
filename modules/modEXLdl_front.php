@@ -111,11 +111,6 @@ switch ($_REQUEST['Rxls']) {
         $worksheet1->write_string(2, 0, strtoupper($_SESSION['lprstatus']), $fjudul); $worksheet1->merge_cells(2, 0, 2, 15);
         $worksheet1->write_string(3, 0, strtoupper($_SESSION['lprcabang']), $fjudul); $worksheet1->merge_cells(3, 0, 3, 15);
         $worksheet1->write_string(4, 0, strtoupper($_SESSION['lprperiode']), $fjudul);  $worksheet1->merge_cells(4, 0, 4, 15);
-        // $worksheet2->write_string(0, 0, "MEMBERSHIP DATA REPORT", $fjudul);  $worksheet2->merge_cells(0, 0, 0, 15);
-        // $worksheet2->write_string(1, 0, strtoupper($_SESSION['lprproduk']), $fjudul);  $worksheet2->merge_cells(1, 0, 1, 15);
-        // $worksheet2->write_string(2, 0, strtoupper($_SESSION['lprstatus']), $fjudul);  $worksheet2->merge_cells(2, 0, 2, 15);
-        // $worksheet2->write_string(3, 0, strtoupper($_SESSION['lprcabang']), $fjudul);  $worksheet2->merge_cells(3, 0, 3, 15);
-        // $worksheet2->write_string(3, 0, strtoupper($_SESSION['lprperiode']), $fjudul); $worksheet2->merge_cells(3, 0, 3, 15);
 
         $worksheet1->set_row(6, 15);
         $worksheet1->set_column(5, 0, 1); $worksheet1->write_string(5, 0, "NO", $format);
@@ -131,28 +126,16 @@ switch ($_REQUEST['Rxls']) {
         $worksheet1->set_column(5, 9, 20);  $worksheet1->write_string(5, 10, "Cabang", $format);
         $worksheet1->set_column(5, 10, 20); $worksheet1->write_string(5, 11, "Asuransi", $format);
         $worksheet1->set_column(5, 11, 15); $worksheet1->write_string(5, 12, "Total Premi", $format);
-
-
-        // $worksheet2->set_row(5, 13);
-        // $worksheet2->set_column(5, 0, 1);  $worksheet2->write_string(5, 0, "NO", $format);
-        // $worksheet2->set_column(5, 1, 15);  $worksheet2->write_string(5, 1, "No Pinjaman", $format);
-        // $worksheet2->set_column(5, 1, 15); $worksheet2->write_string(5, 2, "ID Peserta", $format);
-        // $worksheet2->set_column(5, 2, 30); $worksheet2->write_string(5, 3, "Nama", $format);
-        // $worksheet2->set_column(5, 3, 10); $worksheet2->write_string(5, 4, "Tgl.Lahir", $format);
-        // $worksheet2->set_column(5, 4, 5);  $worksheet2->write_string(5, 5, "Umur", $format);
-        // $worksheet2->set_column(5, 5, 10); $worksheet2->write_string(5, 6, "Plafond", $format);
-        // $worksheet2->set_column(5, 6, 10); $worksheet2->write_string(5, 7, "Tgl.Akad", $format);
-        // $worksheet2->set_column(5, 7, 5);  $worksheet2->write_string(5, 8, "Tenor", $format);
-        // $worksheet2->set_column(5, 8, 10); $worksheet2->write_string(5, 9, "Tgl.Akhir", $format);
-        // $worksheet2->set_column(5, 9, 20); $worksheet2->write_string(5, 10, "Cabang", $format);
-        // $worksheet2->set_column(5, 10, 10);  $worksheet2->write_string(5, 11, "Asuransi", $format);
-        // $worksheet2->set_column(5, 11, 15);  $worksheet2->write_string(5, 12, "Total Premi", $format);
+$worksheet1->set_column(5, 11, 15); $worksheet1->write_string(5, 13, "Tgl Bayar Premi", $format);
+$worksheet1->set_column(5, 11, 15); $worksheet1->write_string(5, 14, "Tgl Bayar Resturno", $format);
 
         $baris = 6;
 
         $metCOB = mysql_query(AES::decrypt128CBC($_SESSION[$type], ENCRYPTION_KEY));
 
         while ($metCOB_ = mysql_fetch_array($metCOB)) {
+            // echo var_dump($metCOB_);
+            // die();
             $worksheet1->write_string($baris, 0, ++$no, 'C');
             $worksheet1->write_string($baris, 1, $metCOB_['nopinjaman']);
             $worksheet1->write_string($baris, 2, $metCOB_['idpeserta']);
@@ -167,19 +150,9 @@ switch ($_REQUEST['Rxls']) {
             $worksheet1->write_string($baris, 11, $metCOB_['asuransi']);
             $worksheet1->write_number($baris, 12, $metCOB_['totalpremi']);
 
-            // $worksheet2->write_string($baris, 0, ++$no1, 'C');
-            // $worksheet2->write_string($baris, 1, $metCOB_['nopinjaman']);
-            // $worksheet2->write_string($baris, 2, $metCOB_['idpeserta']);
-            // $worksheet2->write_string($baris, 3, $metCOB_['nama']);
-            // $worksheet2->write_string($baris, 4, $metCOB_['tgllahir']);
-            // $worksheet2->write_number($baris, 5, $metCOB_['usia']);
-            // $worksheet2->write_number($baris, 6, $metCOB_['plafond']);
-            // $worksheet2->write_string($baris, 7, _convertDate($metCOB_['tglakad']));
-            // $worksheet2->write_number($baris, 8, $metCOB_['tenor']);
-            // $worksheet2->write_string($baris, 9, _convertDate($metCOB_['tglakhir']));
-            // $worksheet2->write_string($baris, 10, $metCOB_['cabang']);
-            // $worksheet2->write_string($baris, 11, $metCOB_['asuransi']);
-            // $worksheet2->write_number($baris, 12, $metCOB_['astotalpremi']);
+            $worksheet1->write_string($baris, 13, ($metCOB_['tglbayaras']));
+            $worksheet1->write_string($baris, 14, ($metCOB_['tgl_bayar']));
+
             $baris++;
             $tPremi += $metCOB_['totalpremi'];
             $tPremias += $metCOB_['astotalpremi'];

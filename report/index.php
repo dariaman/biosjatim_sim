@@ -193,13 +193,13 @@ _head($user, $namauser, $photo, $logo);
 							<label class="control-label col-sm-3">Tanggal Akad <span class="text-danger">*</span></label>
 							<div class="col-sm-3">
 								<div class="input-group date">
-									<input type="text" name="startdate" id="startdate" class="form-control" placeholder="Start Date"  />
+									<input type="text" name="startdate" id="startdate" class="form-control" placeholder="Start Date" autocomplete="off"  />
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group date">
-									<input type="text" name="enddate" id="enddate" class="form-control" placeholder="End Date"  />
+									<input type="text" name="enddate" id="enddate" class="form-control" placeholder="End Date" autocomplete="off" />
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								</div>
 							</div>
@@ -286,8 +286,6 @@ _head($user, $namauser, $photo, $logo);
 					validate_tgl2();
 				} 
 			}
-			
-			
 			
 			$("#startdate").datepicker({
 				todayHighlight: !0,

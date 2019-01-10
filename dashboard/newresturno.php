@@ -60,7 +60,8 @@ _head($user, $namauser, $photo, $logo);
             <div class="form-group">
               <label class="control-label col-sm-3">Nilai Bayar <span class="text-danger">*</span></label>
               <div class="col-sm-6">
-              	<input type="number" step="0.01" id="amount" name="amount" class="form-control" autocomplete="off" required/>
+
+              	<input class="form-control" type="text" id="amount" name="amount" autocomplete="off" required/>
               </div>
             </div>
             
@@ -126,6 +127,7 @@ _head($user, $namauser, $photo, $logo);
 		$(document).ready(function() {
 		  App.init();
 		  Demo.init();
+		  $('#amount').mask('000,000,000,000,000' , {reverse: true});
 
       $('.date-picker').datepicker( {
         format: 'mm-yyyy',
